@@ -1,0 +1,15 @@
+planejamento dos endpoints
+
+users:
+	get all users
+	post user
+	delete user by id
+
+posts:
+	get all posts
+	post task
+	delete post by id
+	put task by id
+
+likes_dislikes:
+	get all users with posts
