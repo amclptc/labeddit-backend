@@ -26,9 +26,11 @@ DROP TABLE posts;
 
 
 CREATE TABLE likes_dislikes (
-    user_id NOT NULL,
-    post_id NOT NULL,
-    like INTEGER DEFAULT (0) NOT NULL
+    user_id TEXT NOT NULL,
+    post_id TEXT NOT NULL,
+    like INTEGER DEFAULT (0) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (post_id) REFERENCES posts(id)
 );
 
 DROP TABLE likes_dislikes;
@@ -41,13 +43,13 @@ VALUES
 ('u002', 'Tyler, the Creator', 'tylerthecreator@email.com', 'bastard123'),
 ('u003', 'Eminem', 'eminem@email.com', 'slimshady123');
 
-INSERT INTO posts (id, creator_id, content, likes, dislikes)
+INSERT INTO posts (id, content)
 VALUES
-('p001', 'u001', 'texto qualquer', 0, 0),
-('p002', 'u002', 'texto qualquer', 0, 0),
-('p003', 'u003', 'texto qualquer', 0, 0),
-('p004', 'u001', 'texto qualquer', 0, 0),
-('p005', 'u002', 'texto qualquer', 0, 0);
+('p001', 'u001', 'texto qualquer'),
+('p002', 'u002', 'texto qualquer'),
+('p003', 'u003', 'texto qualquer'),
+('p004', 'u001', 'texto qualquer'),
+('p005', 'u002', 'texto qualquer');
 
 INSERT INTO likes_dislikes (user_id, post_id, like)
 VALUES
@@ -56,4 +58,11 @@ VALUES
 ('u003', 'p003', 0),
 ('u001', 'p004', 0),
 ('u002', 'p005', 0);
+
+
+SELECT * FROM posts
+LEFT JOIN users_posts
+ON users_posts.post_id = posts.id
+LEFT JOIN users
+ON users_posts.post_id = posts.id;
 
